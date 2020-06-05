@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/async-http-client" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/async-kit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/console-kit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/fluent" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/fluent-kit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/fluent-sqlite-driver" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/leaf" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/leaf-kit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/routing-kit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/sql-kit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/sqlite-kit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/sqlite-nio" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/swift-backtrace" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/swift-crypto" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/swift-log" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/swift-metrics" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/swift-nio" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/swift-nio-extras" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/swift-nio-http2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/swift-nio-ssl" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/vapor" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/websocket-kit" vcs="Git" />
+  </component>
+</project>
