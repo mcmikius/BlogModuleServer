@@ -15,5 +15,4 @@ struct BlogRouter: RouteCollection {
         routes.get("blog", use: self.controller.blogView)
         routes.get(.anything, use: self.controller.postView)
     }
-    
 }

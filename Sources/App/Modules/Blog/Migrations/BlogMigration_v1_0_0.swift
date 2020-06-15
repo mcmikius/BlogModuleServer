@@ -9,7 +9,7 @@ import Foundation
 import Fluent
 
 struct BlogMigration_v1_0_0: Migration {
-    
+
     private func uncategorizedPosts(for category: BlogCategoryModel) -> [BlogPostModel] {
         [
             BlogPostModel(title: "California",
@@ -21,7 +21,7 @@ struct BlogMigration_v1_0_0: Migration {
                           categoryId: category.id!),
         ]
     }
-    
+
     private func islandPosts(for category: BlogCategoryModel) -> [BlogPostModel] {
         [
             BlogPostModel(title: "Indonesia",
@@ -58,8 +58,7 @@ struct BlogMigration_v1_0_0: Migration {
         ]
     }
     
-    
-    
+
     func prepare(on database: Database) -> EventLoopFuture<Void> {
         database.eventLoop.flatten([
             database.schema(BlogCategoryModel.schema)
@@ -77,22 +76,23 @@ struct BlogMigration_v1_0_0: Migration {
                 .field(BlogPostModel.FieldKeys.categoryId, .uuid)
                 .foreignKey(BlogPostModel.FieldKeys.categoryId,
                             references: BlogCategoryModel.schema, .id,
-                            onDelete: DatabaseSchema.ForeignKeyAction.setNull,
+                            onDelete: .cascade,
                             onUpdate: .cascade)
                 .unique(on: BlogPostModel.FieldKeys.slug)
                 .create(),
-        ]).flatMap {
+        ])
+        .flatMap {
             let defaultCategory = BlogCategoryModel(title: "Uncategorized")
             let islandsCategory = BlogCategoryModel(title: "Islands")
             return [defaultCategory, islandsCategory].create(on: database)
-                .flatMap { [unowned defaultCategory] in
-                    let posts = self.uncategorizedPosts(for: defaultCategory) +
-                        self.islandPosts(for: islandsCategory)
-                    return posts.create(on: database)
+            .flatMap { [unowned defaultCategory] in
+                let posts = self.uncategorizedPosts(for: defaultCategory) +
+                            self.islandPosts(for: islandsCategory)
+                return posts.create(on: database)
             }
         }
     }
-    
+
     func revert(on database: Database) -> EventLoopFuture<Void> {
         database.eventLoop.flatten([
             database.schema(BlogCategoryModel.schema).delete(),
@@ -100,3 +100,4 @@ struct BlogMigration_v1_0_0: Migration {
         ])
     }
 }
+

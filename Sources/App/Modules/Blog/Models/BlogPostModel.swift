@@ -11,7 +11,7 @@ import Fluent
 final class BlogPostModel: Model {
     
     static let schema: String = "blog_posts"
-    
+
     struct FieldKeys {
         static var title: FieldKey { "title" }
         static var slug: FieldKey { "slug" }
@@ -22,32 +22,17 @@ final class BlogPostModel: Model {
         static var categoryId: FieldKey { "category_id" }
     }
     
-    @ID()
-    var id: UUID?
-    
-    @Field(key: FieldKeys.title)
-    var title: String
-    
-    @Field(key: FieldKeys.slug)
-    var slug: String
-    
-    @Field(key: FieldKeys.image)
-    var image: String
-    
-    @Field(key: FieldKeys.excerpt)
-    var excerpt: String
-    
-    @Field(key: FieldKeys.date)
-    var date: Date
-    
-    @Field(key: FieldKeys.content)
-    var content: String
-    
-    @Parent(key: FieldKeys.categoryId)
-    var category: BlogCategoryModel
-    
+    @ID() var id: UUID?
+    @Field(key: FieldKeys.title) var title: String
+    @Field(key: FieldKeys.slug) var slug: String
+    @Field(key: FieldKeys.image) var image: String
+    @Field(key: FieldKeys.excerpt) var excerpt: String
+    @Field(key: FieldKeys.date) var date: Date
+    @Field(key: FieldKeys.content) var content: String
+    @Parent(key: FieldKeys.categoryId) var category: BlogCategoryModel
+
     init() { }
-    
+
     init(id: UUID? = nil,
          title: String,
          slug: String,
@@ -69,7 +54,7 @@ final class BlogPostModel: Model {
 }
 
 extension BlogPostModel {
-    
+
     struct ViewContext: Encodable {
         var id: String
         var title: String
@@ -78,7 +63,7 @@ extension BlogPostModel {
         var excerpt: String
         var date: String
         var content: String
-        
+
         init(model: BlogPostModel) {
             self.id = model.id!.uuidString
             self.title = model.title
@@ -89,6 +74,6 @@ extension BlogPostModel {
             self.content = model.content
         }
     }
-    
+
     var viewContext: ViewContext { .init(model: self) }
 }

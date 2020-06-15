@@ -10,7 +10,5 @@ import Fluent
 
 struct FrontendModule: Module {
     
-    var router: RouteCollection? {
-        FrontendRouter()
-    }
+    var router: RouteCollection? { FrontendRouter() }
 }
