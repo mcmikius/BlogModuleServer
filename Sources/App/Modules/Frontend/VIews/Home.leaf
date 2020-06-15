@@ -8,7 +8,8 @@
         </section>
         <section class="wrapper">
             #if(email != nil):
-            <b>#(email)</b> is logged in <a href="/logout">Logout</a>
+            <p><b>#(email)</b> is logged in.</p>
+            <a href="/admin">Admin</a> &middot; <a href="/logout">Logout</a>
             #else:
             <a href="/sign-in">Sign in</a>
             #endif

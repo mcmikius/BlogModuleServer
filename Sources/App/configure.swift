@@ -21,6 +21,7 @@ public func configure(_ app: Application) throws {
     let modules: [Module] = [
         UserModule(),
         FrontendModule(),
+        AdminModule(),
         BlogModule(),
     ]
     
