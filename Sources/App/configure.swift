@@ -11,8 +11,12 @@ public func configure(_ app: Application) throws {
     app.leaf.cache.isEnabled = app.environment.isRelease
     
     app.databases.use(.sqlite(.file("db.sqlite")), as: .sqlite)
+    app.sessions.use(.fluent)
+    app.migrations.add(SessionRecord.migration)
+    app.middleware.use(app.sessions.middleware)
 
     let modules: [Module] = [
+        UserModule(),
         FrontendModule(),
         BlogModule(),
     ]
