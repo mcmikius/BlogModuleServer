@@ -1,3 +1,7 @@
+/**
+ * FILE:
+ * Public/css/frontend.css
+ */
 * {
     margin: 0;
     padding: 0;
@@ -51,4 +55,73 @@ main {
 }
 #blog article {
     margin: 32px 0px;
+}
+
+/**
+ * FILE:
+ * Public/css/frontend.css
+ * (insert after previous snippet)
+ */
+@media (max-width: 599px) {}
+@media (min-width: 600px) {}
+@media (min-width: 900px) {}
+@media (min-width: 1200px) {}
+@media (min-width: 1800px) {}
+
+/**
+ * FILE:
+ * Public/css/frontend.css
+ * (insert after previous snippet)
+ */
+body {
+    background: #fff;
+    color: #222;
+}
+hr {
+    border-color: #ccc;
+}
+a {
+    color: #2B7DF6;
+}
+a:hover {
+    color: #555BCF;
+}
+a:visited {
+    color: #A35CD7;
+}
+header {
+    background: #efefef;
+}
+header h1 {
+    color: #000;
+}
+
+/**
+ * FILE:
+ * Public/css/frontend.css
+ * (insert after previous snippet)
+ */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #222;
+        color: #fff;
+    }
+    hr {
+        border-color: #333;
+    }
+    a {
+        color: #3386F7;
+    }
+    a:hover {
+        color: #5B61DE;
+    }
+    a:visited {
+        color: #B365EA;
+    }
+    header {
+        background: #000;
+    }
+    header h1 {
+        color: #fff;
+    }
 }
