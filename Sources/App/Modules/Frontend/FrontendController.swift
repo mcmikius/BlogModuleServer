@@ -24,6 +24,6 @@ struct FrontendController {
                               header: "Hi there,",
                               message: "welcome to my awesome page!",
                               email: email)
-        return req.view.render("home", context)
+        return req.view.render("Frontend/Home", context)
     }
 }
