@@ -19,7 +19,7 @@ struct BlogFrontendController {
             let title: String
             let items: [PostWithCategory]
         }
-
+        
         return BlogPostModel.query(on: req.db)
             .sort(\.$date, .descending)
             .with(\.$category)
@@ -29,9 +29,9 @@ struct BlogFrontendController {
             .flatMap {
                 let context = Context(title: "myPage - Blog", items: $0)
                 return req.view.render("blog", context)
-            }
+        }
     }
-
+    
     func postView(req: Request) throws -> EventLoopFuture<Response> {
         struct Context: Encodable {
             struct PostWithCategory: Encodable {
@@ -56,6 +56,6 @@ struct BlogFrontendController {
                                                     post: post.viewContext)
                 let context = Context(title: "myPage - \("post.title")", item: item)
                 return req.view.render("post", context).encodeResponse(for: req)
-            }
+        }
     }
 }
