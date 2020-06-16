@@ -4,6 +4,11 @@ import FluentSQLiteDriver
 import Liquid
 import LiquidLocalDriver
 import Vapor
+import FluentPostgresDriver
+
+extension Environment {
+    static let pgUrl = URL(string: Self.get("DB_URL")!)!
+}
 
 public func configure(_ app: Application) throws {
 
@@ -22,7 +27,8 @@ public func configure(_ app: Application) throws {
     app.leaf.files = ModularViewFiles(workingDirectory: workingDirectory,
                                       fileio: app.fileio)
 
-    app.databases.use(.sqlite(.file("db.sqlite")), as: .sqlite)
+//    app.databases.use(.sqlite(.file("db.sqlite")), as: .sqlite)
+    try app.databases.use(.postgres(url: Environment.pgUrl), as: .psql)
 
     app.sessions.use(.fluent)
     app.migrations.add(SessionRecord.migration)

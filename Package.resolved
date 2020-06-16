@@ -20,6 +20,24 @@
         }
       },
       {
+        "package": "aws-sdk-swift",
+        "repositoryURL": "https://github.com/swift-aws/aws-sdk-swift.git",
+        "state": {
+          "branch": null,
+          "revision": "0f5a40c1331f497dd5cc29c873d9f0ee4ff0db60",
+          "version": "5.0.0-alpha.4"
+        }
+      },
+      {
+        "package": "aws-sdk-swift-core",
+        "repositoryURL": "https://github.com/swift-aws/aws-sdk-swift-core.git",
+        "state": {
+          "branch": null,
+          "revision": "e0f70315488c23ea64ab63ef7b8530ce01783024",
+          "version": "5.0.0-alpha.4"
+        }
+      },
+      {
         "package": "console-kit",
         "repositoryURL": "https://github.com/vapor/console-kit.git",
         "state": {
@@ -44,6 +62,15 @@
           "branch": null,
           "revision": "7396d1ac4fa7d510b1c280351e98b8192a4ec34b",
           "version": "1.0.0"
+        }
+      },
+      {
+        "package": "fluent-postgres-driver",
+        "repositoryURL": "https://github.com/vapor/fluent-postgres-driver",
+        "state": {
+          "branch": null,
+          "revision": "cf8ec53b87606dc799a07a0754a297b32cf9f592",
+          "version": "2.0.0"
         }
       },
       {
@@ -83,6 +110,15 @@
         }
       },
       {
+        "package": "liquid-aws-s3-driver",
+        "repositoryURL": "https://github.com/binarybirds/liquid-aws-s3-driver.git",
+        "state": {
+          "branch": null,
+          "revision": "a3bc96fc2b0dd6a78020024d8c42cbd4bc2822f5",
+          "version": "1.0.3"
+        }
+      },
+      {
         "package": "liquid-kit",
         "repositoryURL": "https://github.com/binarybirds/liquid-kit.git",
         "state": {
@@ -98,6 +134,24 @@
           "branch": null,
           "revision": "7107c23fc41ee85bed22c94f29d33962bb3239ec",
           "version": "1.0.3"
+        }
+      },
+      {
+        "package": "postgres-kit",
+        "repositoryURL": "https://github.com/vapor/postgres-kit.git",
+        "state": {
+          "branch": null,
+          "revision": "e43a32baec80ebbcfed4d0330d0be50eb73434c7",
+          "version": "2.0.1"
+        }
+      },
+      {
+        "package": "postgres-nio",
+        "repositoryURL": "https://github.com/vapor/postgres-nio.git",
+        "state": {
+          "branch": null,
+          "revision": "25aa31fdd55ea119edee270ce4bd7bd4bd59fdf7",
+          "version": "1.1.0"
         }
       },
       {
@@ -206,6 +260,15 @@
           "branch": null,
           "revision": "f0b118d9af6c4e78bc4f3f4fbb464020172b0bf4",
           "version": "2.7.5"
+        }
+      },
+      {
+        "package": "swift-nio-transport-services",
+        "repositoryURL": "https://github.com/apple/swift-nio-transport-services.git",
+        "state": {
+          "branch": null,
+          "revision": "2ac8fde712c1b1a147ecb7065824a40d2c09d0cb",
+          "version": "1.6.0"
         }
       },
       {
