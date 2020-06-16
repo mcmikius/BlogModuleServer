@@ -7,26 +7,28 @@
 
 import Vapor
 import Fluent
- 
+
 final class UtilityFileTransferCommand: Command {
     
     static let name = "file-transfer"
- 
+
     struct Signature: CommandSignature { }
         
     let help = "Transfers public files into the assets folder for the blog posts"
-func run(using context: CommandContext, signature: Signature) throws {
+    
+    func run(using context: CommandContext, signature: Signature) throws {
         let app = context.application
- 
+
         let frames = ["⠋","⠙","⠹","⠸","⠼","⠴","⠦","⠧","⠇","⠏"]
             .map { $0 + " File transfer in progress..."}
- 
+
         let loadingBar = context.console.customActivity(frames: frames)
         loadingBar.start()
         
         let publicPath = app.directory.publicDirectory
         let assetsPath = publicPath + "/assets/"
- 
+        
+
         do {
             let models = try BlogPostModel.query(on: app.db).all().wait()
             

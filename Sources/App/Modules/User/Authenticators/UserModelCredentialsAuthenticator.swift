@@ -14,9 +14,9 @@ struct UserModelCredentialsAuthenticator: CredentialsAuthenticator {
         let email: String
         let password: String
     }
-    
+
     typealias Credentials = Input
-    
+
     func authenticate(credentials: Credentials,
                       for req: Request) -> EventLoopFuture<Void> {
         UserModel.query(on: req.db)
@@ -35,6 +35,7 @@ struct UserModelCredentialsAuthenticator: CredentialsAuthenticator {
                 catch {
                     // do nothing...
                 }
-        }
+            }
     }
 }
+

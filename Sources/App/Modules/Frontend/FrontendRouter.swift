@@ -15,4 +15,5 @@ struct FrontendRouter: RouteCollection {
         routes.grouped(UserModelSessionAuthenticator())
             .get(use: self.controller.homeView)
     }
+
 }

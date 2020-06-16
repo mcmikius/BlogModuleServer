@@ -10,25 +10,37 @@ import Vapor
 struct BlogRouter: RouteCollection {
     
     let frontendController = BlogFrontendController()
-    let adminController = BlogPostAdminController()
+    let postAdminController = BlogPostAdminController()
+    let categoryAdminController = BlogCategoryAdminController()
     
     func boot(routes: RoutesBuilder) throws {
-        
+
         routes.get("blog", use: self.frontendController.blogView)
         routes.get(.anything, use: self.frontendController.postView)
-        
+
         let protected = routes.grouped([
             UserModelSessionAuthenticator(),
             UserModel.redirectMiddleware(path: "/")
         ])
         let blog = protected.grouped("admin", "blog")
-        let posts = blog.grouped("posts")
+        self.postAdminController.setupRoutes(routes: blog, on: "posts")
+        self.categoryAdminController.setupRoutes(routes: blog, on: "categories")
         
-        posts.get(use: self.adminController.listView)
-        posts.get("new", use: self.adminController.createView)
-        posts.post("new", use: self.adminController.create)
-        posts.get(":id", use: self.adminController.updateView)
-        posts.post(":id", use: self.adminController.update)
-        posts.post(":id", "delete", use: self.adminController.delete)
+        let blogApi = routes.grouped([
+            UserTokenModel.authenticator(),
+            UserModel.guardMiddleware(),
+        ]).grouped("api", "blog")
+
+        let categories = blogApi.grouped("categories")
+        let categoryApiController = BlogCategoryApiController()
+        categoryApiController.setupListRoute(routes: categories)
+        categoryApiController.setupGetRoute(routes: categories)
+        categoryApiController.setupCreateRoute(routes: categories)
+        categoryApiController.setupUpdateRoute(routes: categories)
+        categoryApiController.setupPatchRoute(routes: categories)
+        categoryApiController.setupDeleteRoute(routes: categories)
+        
+        let postsApiController = BlogPostApiController()
+        postsApiController.setupRoutes(routes: blogApi, on: "posts")
     }
 }

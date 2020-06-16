@@ -7,8 +7,9 @@
 
 import Vapor
 
-final class BlogPostEditForm: Encodable {
-    
+final class BlogPostEditForm: Form {
+    typealias Model = BlogPostModel
+
     struct Input: Decodable {
         var id: String
         var title: String
@@ -43,17 +44,29 @@ final class BlogPostEditForm: Encodable {
         self.date.value = context.date
         self.content.value = context.content
         self.categoryId.value = context.categoryId
+
         self.image.delete = context.imageDelete ?? false
-                if
-                    let image = context.image,
-                    let data = image.data.getData(at: 0, length: image.data.readableBytes),
-                    !data.isEmpty
-                {
-                    self.image.data = data
-                }
+        if
+            let image = context.image,
+            let data = image.data.getData(at: 0, length: image.data.readableBytes),
+            !data.isEmpty
+        {
+            self.image.data = data
+        }
     }
     
-    func write(to model: BlogPostModel) {
+    func read(from model: Model)  {
+        self.id = model.id!.uuidString
+        self.title.value = model.title
+        self.slug.value = model.slug
+        self.excerpt.value = model.excerpt
+        self.date.value = DateFormatter.year.string(from: model.date)
+        self.content.value = model.content
+        self.categoryId.value = model.$category.id.uuidString
+        self.image.value = model.image
+    }
+
+    func write(to model: Model) {
         model.title = self.title.value
         model.slug = self.slug.value
         model.excerpt = self.excerpt.value
@@ -61,14 +74,14 @@ final class BlogPostEditForm: Encodable {
         model.content = self.content.value
         model.$category.id = UUID(uuidString: self.categoryId.value)!
         if !self.image.value.isEmpty {
-                    model.image = self.image.value
-                }
-                if self.image.delete {
-                    model.image = ""
-                }
+            model.image = self.image.value
+        }
+        if self.image.delete {
+            model.image = ""
+        }
     }
     
-    func validate() -> Bool {
+    func validate(req: Request) -> EventLoopFuture<Bool> {
         var valid = true
         
         if self.title.value.isEmpty {
@@ -91,25 +104,15 @@ final class BlogPostEditForm: Encodable {
             self.content.error = "Content is required"
             valid = false
         }
+
         let uuid = UUID(uuidString: self.categoryId.value)
         return BlogCategoryModel.find(uuid, on: req.db)
-            .map { model in
-                if model == nil {
-                    self.categoryId.error = "Category identifier error"
-                    valid = false
-                }
-                return valid
+        .map { model in
+            if model == nil {
+                self.categoryId.error = "Category identifier error"
+                valid = false
+            }
+            return valid
         }
-    }
-    
-    func read(from model: BlogPostModel)  {
-        self.id = model.id!.uuidString
-        self.title.value = model.title
-        self.slug.value = model.slug
-        self.excerpt.value = model.excerpt
-        self.date.value = DateFormatter.year.string(from: model.date)
-        self.content.value = model.content
-        self.categoryId.value = model.$category.id.uuidString
-        self.image.value = model.image
     }
 }

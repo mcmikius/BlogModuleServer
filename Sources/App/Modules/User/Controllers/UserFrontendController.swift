@@ -24,7 +24,7 @@ struct UserFrontendController {
         req.session.authenticate(user)
         return req.redirect(to: "/")
     }
-    
+
     func logout(req: Request) throws -> Response {
         req.auth.logout(UserModel.self)
         req.session.unauthenticate(UserModel.self)
