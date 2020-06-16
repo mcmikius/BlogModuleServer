@@ -47,28 +47,36 @@ final class BlogPostEditForm: Encodable {
         model.content = self.content.value
     }
     func validate() -> Bool {
-            var valid = true
-     
-            if self.title.value.isEmpty {
-                self.title.error = "Title is required"
-                valid = false
-            }
-            if self.slug.value.isEmpty {
-                self.slug.error = "Slug is required"
-                valid = false
-            }
-            if self.excerpt.value.isEmpty {
-                self.excerpt.error = "Excerpt is required"
-                valid = false
-            }
-            if DateFormatter.year.date(from: self.date.value) == nil {
-                self.date.error = "Invalid date"
-                valid = false
-            }
-            if self.content.value.isEmpty {
-                self.content.error = "Content is required"
-                valid = false
-            }
-            return valid
+        var valid = true
+        
+        if self.title.value.isEmpty {
+            self.title.error = "Title is required"
+            valid = false
         }
+        if self.slug.value.isEmpty {
+            self.slug.error = "Slug is required"
+            valid = false
+        }
+        if self.excerpt.value.isEmpty {
+            self.excerpt.error = "Excerpt is required"
+            valid = false
+        }
+        if DateFormatter.year.date(from: self.date.value) == nil {
+            self.date.error = "Invalid date"
+            valid = false
+        }
+        if self.content.value.isEmpty {
+            self.content.error = "Content is required"
+            valid = false
+        }
+        return valid
+    }
+    func read(from model: BlogPostModel)  {
+        self.id = model.id!.uuidString
+        self.title.value = model.title
+        self.slug.value = model.slug
+        self.excerpt.value = model.excerpt
+        self.date.value = DateFormatter.year.string(from: model.date)
+        self.content.value = model.content
+    }
 }

@@ -77,4 +77,43 @@ struct BlogPostAdminController {
             req.redirect(to: "/admin/blog/posts")
         }
     }
+    
+    func find(_ req: Request) throws -> EventLoopFuture<BlogPostModel> {
+        guard
+            let id = req.parameters.get("id"),
+            let uuid = UUID(uuidString: id)
+            else {
+                throw Abort(.badRequest)
+        }
+        return BlogPostModel.find(uuid, on: req.db).unwrap(or: Abort(.notFound))
+    }
+    
+    func updateView(req: Request) throws -> EventLoopFuture<View>  {
+        try self.find(req).flatMap { model in
+            let form = BlogPostEditForm()
+            form.read(from: model)
+            return self.render(req: req, form: form)
+        }
+    }
+     
+    func update(req: Request) throws -> EventLoopFuture<View> {
+        let form = try BlogPostEditForm(req: req)
+        guard form.validate() else {
+            return self.render(req: req, form: form)
+        }
+        return try self.find(req)
+            .flatMap { model in
+                form.write(to: model)
+                return model.update(on: req.db)
+        }
+        .flatMap {
+            self.render(req: req, form: form)
+        }
+    }
+    
+    func delete(req: Request) throws -> EventLoopFuture<String> {
+        try self.find(req).flatMap { item in
+            item.delete(on: req.db).map { item.id!.uuidString }
+        }
+    }
 }
