@@ -2,6 +2,7 @@
 #export("body"):
 <div class="wrapper">
     <h2>Posts</h2>
+    <a href="/admin/blog/posts/new">Create</a>
 </div>
  
 <table class="wrapper">
